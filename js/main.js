@@ -106,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () => {
     descrBtn.forEach((item) => {
         item.addEventListener('click', (event) => {
             overlay.style.display = 'block';
-            event.target.classList.add('more-splash');;
+            event.target.classList.add('more-splash');
             document.body.style.overflow = 'hidden';
         });
     });
