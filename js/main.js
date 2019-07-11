@@ -133,7 +133,16 @@ window.addEventListener('DOMContentLoaded', () => {
     // AJAX modal
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-        sendData(form, input);
+        sendData(form, input)
+                .then(() => {
+                    statusMsg.innerHTML = message.loading;
+                })
+                .then(() => {
+                    statusMsg.innerHTML = message.success;
+                })
+                .catch(() => {
+                    statusMsg.innerHTML = message.fail;
+                });
     });
 
     // Contact form
@@ -142,40 +151,51 @@ window.addEventListener('DOMContentLoaded', () => {
 
     contactForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        sendData(contactForm, contactInput);
+        sendData(form, input)
+                .then(() => {
+                    statusMsg.innerHTML = message.loading;
+                })
+                .then(() => {
+                    statusMsg.innerHTML = message.success;
+                })
+                .catch(() => {
+                    statusMsg.innerHTML = message.fail;
+                });
     });
 
     // AJAX sending JSON data from form
     function sendData(form, input) {
-        form.appendChild(statusMsg);
 
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        request.setRequestHeader('Content-type', 'application/json; charset=utf-8'); // 
+        return new Promise((resolve, reject) => {
+            form.appendChild(statusMsg);
 
-        let formData = new FormData(form);
-        let obj = {};
+            let request = new XMLHttpRequest();
+            request.open('POST', 'server.php');
+            request.setRequestHeader('Content-type', 'application/json; charset=utf-8'); // 
 
-        formData.forEach((value, key) => {
-            obj[key] = value;
-        });
+            let formData = new FormData(form);
+            let obj = {};
 
-        let json = JSON.stringify(obj);
-        request.send(json);
+            formData.forEach((value, key) => {
+                obj[key] = value;
+            });
 
+            let json = JSON.stringify(obj);
+            request.send(json);
 
-        request.addEventListener('readystatechange', () => {
-            if (request.readyState < 4) {
-                statusMsg.innerHTML = message.loading;
-            } else if (request.readyState === 4 && request.status == 200) {
-                statusMsg.innerHTML = message.success;
-            } else {
-                statusMsg.innerHTML = message.fail;
+            request.addEventListener('readystatechange', () => {
+                if (request.readyState < 4) {
+                    resolve();
+                } else if (request.readyState === 4 && request.status == 200) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            });
+
+            for (let i = 0; i < input.length; i++) {
+                input[i].value = '';
             }
         });
-
-        for (let i = 0; i < input.length; i++) {
-            input[i].value = '';
-        }
     }
 });
