@@ -116,4 +116,66 @@ window.addEventListener('DOMContentLoaded', () => {
         moreBtn.classList.remove('more-splash');
         document.body.style.overflow = '';
     });
+
+    // Msg for status
+    let message = {
+        loading: 'Загрузка',
+        success: 'Спасибо! Наши менеджеры свяжутся с вами.',
+        fail: 'Что-то пошло не так'
+    },
+    statusMsg = document.createElement('div');
+    statusMsg.classList.add('status');
+
+    // Modal form
+    let form = document.querySelector('.main-form'),
+        input = form.getElementsByTagName('input');
+
+    // AJAX modal
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        sendData(form, input);
+    });
+
+    // Contact form
+    let contactForm = document.querySelector('#form'),
+        contactInput = contactForm.getElementsByTagName('input');
+
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        sendData(contactForm, contactInput);
+    });
+
+    // AJAX sending JSON data from form
+    function sendData(form, input) {
+        form.appendChild(statusMsg);
+
+        let request = new XMLHttpRequest();
+        request.open('POST', 'server.php');
+        request.setRequestHeader('Content-type', 'application/json; charset=utf-8'); // 
+
+        let formData = new FormData(form);
+        let obj = {};
+
+        formData.forEach((value, key) => {
+            obj[key] = value;
+        });
+
+        let json = JSON.stringify(obj);
+        request.send(json);
+
+
+        request.addEventListener('readystatechange', () => {
+            if (request.readyState < 4) {
+                statusMsg.innerHTML = message.loading;
+            } else if (request.readyState === 4 && request.status == 200) {
+                statusMsg.innerHTML = message.success;
+            } else {
+                statusMsg.innerHTML = message.fail;
+            }
+        });
+
+        for (let i = 0; i < input.length; i++) {
+            input[i].value = '';
+        }
+    }
 });
