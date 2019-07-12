@@ -1,4 +1,4 @@
-All layout and css/less were downloaded from a Js course, so you can find my code only in main.js
+All layout and css/less were downloaded from a Js course, so you can find my code only in js folder
 
 Modules contains:
  - value calc for travel trip
