@@ -17,7 +17,16 @@
   },
   "homepage": "https://github.com/vasyaslife/yoga#readme",
   "devDependencies": {
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
+    "babel-loader": "^8.0.6",
+    "es6-promise": "^4.2.8",
+    "nodelist-foreach-polyfill": "^1.2.0",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5"
+  },
+  "dependencies": {
+    "babel-plugin-es6-promise": "^1.1.1",
+    "formdata-polyfill": "^3.0.18"
   }
 }
