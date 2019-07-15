@@ -1,15 +1,15 @@
 function modal(moreBtn, overlay, closeBtn, descrBtn, animationName) {
 
-    moreBtn.addEventListener('click', (event) => {
+    moreBtn.addEventListener('click', function(event) {
         overlay.style.display = 'block';
-        event.target.classList.add(animationName);
+        this.classList.add(animationName);
         document.body.style.overflow = 'hidden';
     });
 
     descrBtn.forEach((item) => {
-        item.addEventListener('click', (event) => {
+        item.addEventListener('click', function(event) {
             overlay.style.display = 'block';
-            event.target.classList.add(animationName);
+            this.classList.add(animationName);
             document.body.style.overflow = 'hidden';
         });
     });

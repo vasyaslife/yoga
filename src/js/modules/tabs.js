@@ -17,7 +17,7 @@ function tabs(info, tab, tabName, tabContent) {
         }
     }
 
-    info.addEventListener('click', (event) => {
+    info.addEventListener('click', function(event) {
         let target = event.target;
         if (target && target.classList.contains(tabName)) {
             for (let i = 0; i < tab.length; i++) {

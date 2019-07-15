@@ -34,10 +34,10 @@ function slider(slideIndex, slides, prev, next, dotsWrapper, dots, dotActiveName
         increaseSlideIndex(1);
     });
 
-    dotsWrapper.addEventListener('click', (event) => {
+    dotsWrapper.addEventListener('click', function(event) {
         for (let i = 0; i < dots.length; i++) {
-            if (event.target.classList.contains('dot') &&
-            event.target == dots[i]) {
+            if (this.classList.contains('dot') &&
+            this == dots[i]) {
                 currentSlide(++i);
             }
         }

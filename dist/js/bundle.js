@@ -1712,13 +1712,13 @@ module.exports = form;
 function modal(moreBtn, overlay, closeBtn, descrBtn, animationName) {
   moreBtn.addEventListener('click', function (event) {
     overlay.style.display = 'block';
-    event.target.classList.add(animationName);
+    this.classList.add(animationName);
     document.body.style.overflow = 'hidden';
   });
   descrBtn.forEach(function (item) {
     item.addEventListener('click', function (event) {
       overlay.style.display = 'block';
-      event.target.classList.add(animationName);
+      this.classList.add(animationName);
       document.body.style.overflow = 'hidden';
     });
   });
@@ -1778,7 +1778,7 @@ function slider(slideIndex, slides, prev, next, dotsWrapper, dots, dotActiveName
   });
   dotsWrapper.addEventListener('click', function (event) {
     for (var i = 0; i < dots.length; i++) {
-      if (event.target.classList.contains('dot') && event.target == dots[i]) {
+      if (this.classList.contains('dot') && this == dots[i]) {
         currentSlide(++i);
       }
     }
